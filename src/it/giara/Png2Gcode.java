@@ -6,6 +6,8 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
+import it.giara.gui.MainFrame;
+
 public class Png2Gcode
 {
 	static float penSize = 1f;
@@ -15,31 +17,33 @@ public class Png2Gcode
 	
 	public static void main(String[] arg)
 	{
-		File output = new File(".", "deathnote.gcode");
-		BufferedImage img = null;
-		try
-		{
-			img = ImageIO.read(new File("deathnote.png"));
-		} catch (IOException e)
-		{}
+		new MainFrame();
 		
-		GrayConversion conv = new GrayConversion(img);
-		conv.convertGray(195,240);
-		saveImg("gray.png", conv._output);
-		
-		GcodeManager gcode = new GcodeManager(output, upPosition, downPosition, PixelSize);
-		
-		Perimetro per = new Perimetro(img, gcode);
-		
-		per.generatePerimeter(200);
-		
-		per.createPath();
-		
-		saveImg("infill.png", per._infill);
-		saveImg("perimetro.png", per._perimetro);
-		
-		Infill infill = new Infill(per._infill, gcode);
-		infill.createPath();
+//		File output = new File(".", "test/deathnote.gcode");
+//		BufferedImage img = null;
+//		try
+//		{
+//			img = ImageIO.read(new File("test/start.png"));
+//		} catch (IOException e)
+//		{}
+//		
+//		GrayConversion conv = new GrayConversion(img);
+//		conv.convertGray(200,240);
+//		saveImg("test/gray.png", conv._output);
+//		
+//		GcodeManager gcode = new GcodeManager(output, upPosition, downPosition, PixelSize);
+//		
+//		Perimetro per = new Perimetro(conv._output, gcode);
+//		
+//		per.generatePerimeter(200);
+//		
+//		per.createPath();
+//		
+//		saveImg("test/infill.png", per._infill);
+//		saveImg("test/perimetro.png", per._perimetro);
+//		
+//		Infill infill = new Infill(per._infill, gcode);
+//		infill.createPath();
 		
 	}
 	
